@@ -1,0 +1,33 @@
+footer{
+    padding: 10px 150px;
+    border-top: solid 1px #D8541C;
+    .container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        a {
+            padding: 5px 10px;
+            background-color:#D8541C;
+            border-radius: 10px;
+            color:#fff;
+            text-decoration: none;
+            font-family: montserrat;
+            border: 2px solid #D8541C;
+            transition: all .3s ease-in-out;
+            font-size: 1rem;
+    
+    
+        }
+    
+        a:hover {
+            background-color: rgba(54, 54, 54, 0);
+            color:#D8541C;
+        }
+    }
+}
+
+@media screen and (max-width: 768px){
+    footer{
+        padding: 5px 20px;}
+}

@@ -1,0 +1,26 @@
+
+    .Pagination{
+        display: flex;
+        flex-direction: row;
+        list-style:none;
+        gap:1rem;
+    
+        button{
+            padding: 5px 10px;
+            border-radius: 5px;
+            color:#fff;
+            text-decoration: none;
+            font-family: montserrat;
+            border: 2px solid #D8541C;
+            background-color:#D8541C;
+            transition: all .3s ease-in-out;
+        }
+    
+        button:hover{
+            background-color:#fff;
+            color:#D8541C;
+            cursor: pointer;
+        }
+    }
+
+

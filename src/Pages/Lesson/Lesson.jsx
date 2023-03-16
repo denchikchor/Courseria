@@ -1,8 +1,9 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getLessonById } from '../../api';
 import { Preloader } from '../../Components/Preloader/Preloader';
 import { VideoPlayer } from '../../Components/VideoPlayer';
+import { VideoPlayerCourse } from '../../Components/VideoPlayerCourse';
 import './Lesson.scss';
 
 function Lesson() {
@@ -17,31 +18,30 @@ function Lesson() {
     const handleClose = () => {
         setSelectedLessonId();
     };
-    const videoRefPlay = useRef(null);
 
     useEffect(() => {
         getLessonById(id).then((data) => setCourse(data));
     }, [id]);
 
-    const videoRef = useRef(null);
+    // const videoRef = useRef(null);
 
-    useEffect(() => {
-        const handleKeyDown = (event) => {
-            if (event.code === 'Comma') {
-                // Decrease playback speed by 0.25
-                videoRef.current.playbackRate -= 0.25;
-            } else if (event.code === 'Period') {
-                // Increase playback speed by 0.25
-                videoRef.current.playbackRate += 0.25;
-            }
-        };
+    // useEffect(() => {
+    //     const handleKeyDown = (event) => {
+    //         if (event.code === 'Comma') {
+    //             // Decrease playback speed by 0.25
+    //             videoRef.current.playbackRate -= 0.25;
+    //         } else if (event.code === 'Period') {
+    //             // Increase playback speed by 0.25
+    //             videoRef.current.playbackRate += 0.25;
+    //         }
+    //     };
 
-        window.addEventListener('keydown', handleKeyDown);
+    //     window.addEventListener('keydown', handleKeyDown);
 
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-        };
-    }, []);
+    //     return () => {
+    //         window.removeEventListener('keydown', handleKeyDown);
+    //     };
+    // }, []);
 
     return (
         <>
@@ -50,16 +50,15 @@ function Lesson() {
             ) : (
                 <div className="lesson">
                     <h1>{course.title}</h1>
-                    <VideoPlayer src="https://wisey.app/videos/money-management-for-financial-freedom/lesson-1/AppleHLS1/lesson-1.m3u8'" />
-                    <video
-                        controls
-                        className="main-lesson-video"
+                    <VideoPlayer
+                        src={course.lessons[0].link}
+                        controls={true}
+                        muted={true}
+                        autoPlay=""
                         poster={course.previewImageLink + '/cover.webp'}
-                        ref={videoRefPlay}
-                        type="application/x-mpegURL"
-                    >
-                        <source src={course.lessons[0].link} />
-                    </video>
+                        className="main-lesson-video"
+                        autostart="false"
+                    />
                     <p>{course.description}</p>
                     <p>
                         Rating: <span className="text">{course.rating}/5</span>
@@ -112,7 +111,20 @@ function Lesson() {
                                                                     X
                                                                 </button>
                                                             </div>
-                                                            <video
+                                                            <VideoPlayerCourse
+                                                                src={
+                                                                    lesson.link
+                                                                }
+                                                                controls={true}
+                                                                // width="500px"
+                                                                muted={false}
+                                                                autoPlay={false}
+                                                                className="lesson-video"
+                                                                videoId={
+                                                                    lesson.id
+                                                                }
+                                                            />
+                                                            {/* <video
                                                                 controls
                                                                 className="lesson-video"
                                                                 ref={videoRef}
@@ -122,7 +134,7 @@ function Lesson() {
                                                                         lesson.link
                                                                     }
                                                                 />
-                                                            </video>
+                                                            </video> */}
                                                             <p>
                                                                 Press button
                                                                 '&lt;' to

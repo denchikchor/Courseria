@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { PreloaderForVideo } from '../PreloaderForVideo/PreloaderForVideo';
 import { VideoPlayer } from '../VideoPlayer';
 import { Link } from 'react-router-dom';
 import './LessonItem.scss';
@@ -8,7 +7,6 @@ function LessonItem(props) {
     const { id, title, lessonsCount, previewImageLink, rating, meta } = props;
 
     const [showVideo, setShowVideo] = useState(false);
-    const [videoLoaded, setVideoLoaded] = useState(false);
 
     const handleMouseEnter = () => {
         setShowVideo(true);
@@ -16,10 +14,6 @@ function LessonItem(props) {
 
     const handleMouseLeave = () => {
         setShowVideo(false);
-    };
-
-    const handleVideoLoaded = () => {
-        setVideoLoaded(true);
     };
 
     return (
@@ -32,23 +26,15 @@ function LessonItem(props) {
                     >
                         {showVideo ? (
                             <div>
-                                {!videoLoaded && <PreloaderForVideo />}
                                 <VideoPlayer
-                                    src={meta.courseVideoPreview.link}
-                                />
-                                <video
                                     src={
                                         meta.courseVideoPreview.link
                                             ? meta.courseVideoPreview.link
                                             : null
                                     }
-                                    autoPlay
-                                    muted
                                     width="300px"
-                                    onLoadedData={handleVideoLoaded}
-                                    style={{
-                                        display: videoLoaded ? 'block' : 'none',
-                                    }}
+                                    muted={true}
+                                    autoPlay={false}
                                 />
                             </div>
                         ) : (

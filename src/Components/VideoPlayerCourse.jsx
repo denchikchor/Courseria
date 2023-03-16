@@ -1,8 +1,8 @@
 import Hls from 'hls.js';
 import { useState, useEffect, useRef } from 'react';
-import { PreloaderForVideo } from '../Components/PreloaderForVideo/PreloaderForVideo';
+import { PreloaderForVideo } from './PreloaderForVideo/PreloaderForVideo';
 
-export const VideoPlayer = (props) => {
+export const VideoPlayerCourse = (props) => {
     const videoRef = useRef(null);
 
     useEffect(() => {
@@ -24,10 +24,48 @@ export const VideoPlayer = (props) => {
         }
     }, [props.src]);
 
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.code === 'Comma') {
+                // Decrease playback speed by 0.25
+                videoRef.current.playbackRate -= 0.25;
+            } else if (event.code === 'Period') {
+                // Increase playback speed by 0.25
+                videoRef.current.playbackRate += 0.25;
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
+
     const [videoLoaded, setVideoLoaded] = useState(false);
 
     const handleVideoLoaded = () => {
         setVideoLoaded(true);
+    };
+    // eslint-disable-next-line
+    const [currentTime, setCurrentTime] = useState(0);
+
+    useEffect(() => {
+        const savedProgress = localStorage.getItem(
+            `videoProgress_${props.videoId}`
+        );
+        if (savedProgress) {
+            videoRef.current.currentTime = parseFloat(savedProgress);
+            setCurrentTime(parseFloat(savedProgress));
+        }
+    }, [videoRef, props.videoId]);
+
+    const handleTimeUpdate = () => {
+        setCurrentTime(videoRef.current.currentTime);
+        localStorage.setItem(
+            `videoProgress_${props.videoId}`,
+            videoRef.current.currentTime
+        );
     };
 
     // const videos = document.querySelectorAll('video');
@@ -52,6 +90,8 @@ export const VideoPlayer = (props) => {
                 }}
                 poster={props.poster}
                 className={props.className}
+                onTimeUpdate={handleTimeUpdate}
+                videoId={props.videoId}
             ></video>
         </>
     );

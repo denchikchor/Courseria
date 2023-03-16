@@ -23,26 +23,6 @@ function Lesson() {
         getLessonById(id).then((data) => setCourse(data));
     }, [id]);
 
-    // const videoRef = useRef(null);
-
-    // useEffect(() => {
-    //     const handleKeyDown = (event) => {
-    //         if (event.code === 'Comma') {
-    //             // Decrease playback speed by 0.25
-    //             videoRef.current.playbackRate -= 0.25;
-    //         } else if (event.code === 'Period') {
-    //             // Increase playback speed by 0.25
-    //             videoRef.current.playbackRate += 0.25;
-    //         }
-    //     };
-
-    //     window.addEventListener('keydown', handleKeyDown);
-
-    //     return () => {
-    //         window.removeEventListener('keydown', handleKeyDown);
-    //     };
-    // }, []);
-
     return (
         <>
             {!course.id ? (

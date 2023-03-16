@@ -73,6 +73,40 @@ export const VideoPlayerCourse = (props) => {
     //     video.pause();
     // }
 
+    const [isPIPActive, setIsPIPActive] = useState(false);
+
+    useEffect(() => {
+        const video = document.getElementById('video');
+        const pipButton = document.getElementById('pipButton');
+
+        if ('pictureInPictureEnabled' in document) {
+            pipButton.classList.remove('hidden');
+            pipButton.disabled = false;
+
+            pipButton.addEventListener('click', () => {
+                if (document.pictureInPictureElement) {
+                    document.exitPictureInPicture().catch((error) => {
+                        // Error handling
+                    });
+                    setIsPIPActive(false);
+                } else {
+                    video.requestPictureInPicture().catch((error) => {
+                        // Error handling
+                    });
+                    setIsPIPActive(true);
+                }
+            });
+
+            video.addEventListener('enterpictureinpicture', () => {
+                setIsPIPActive(true);
+            });
+
+            video.addEventListener('leavepictureinpicture', () => {
+                setIsPIPActive(false);
+            });
+        }
+    }, []);
+
     return (
         <>
             {!videoLoaded && <PreloaderForVideo />}
@@ -92,7 +126,28 @@ export const VideoPlayerCourse = (props) => {
                 className={props.className}
                 onTimeUpdate={handleTimeUpdate}
                 videoId={props.videoId}
+                id="video"
             ></video>
+            <button
+                id="pipButton"
+                className="hidden"
+                disabled
+                onClick={() => {
+                    if (isPIPActive) {
+                        document.exitPictureInPicture();
+                        setIsPIPActive(false);
+                    } else {
+                        document
+                            .getElementById('video')
+                            .requestPictureInPicture();
+                        setIsPIPActive(true);
+                    }
+                }}
+            >
+                {isPIPActive
+                    ? 'Exit Picture-in-Picture mode'
+                    : 'Enter Picture-in-Picture mode'}
+            </button>
         </>
     );
 };

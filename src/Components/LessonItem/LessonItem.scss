@@ -27,8 +27,10 @@
 
 
     .card-title{
+        display: flex;
         font-size: 1.3rem;
         color:#D8541C;
+        padding-bottom: 10px;
     }
 
     p{
@@ -67,10 +69,17 @@
 
 @media screen and (max-width: 768px){
     .card{
+        padding: 30px; 
+        flex-direction: column;
 
-        padding: 30px;
+        .card-image{
+            width: 100%;
+        }
 
-        
+        .card-action{
+            display: flex;
+            justify-content: center;
+        }
     }
 
 }

@@ -34,7 +34,13 @@
             align-items:center;
             width: 500px;
             padding: 10px 20px;
-            border-radius:10px
+            border-radius:10px;
+
+            p{
+                margin: 0;
+                font-weight: 500;
+            }
+            
          }
         li:nth-child(odd) { background: #fff; }
     }
@@ -103,4 +109,29 @@
     .close-button{
         text-align: end;
     }
+}
+
+
+@media screen and (max-width: 768px){
+    .lesson{
+        width: 90%;
+
+        .main-lesson-video{
+            width: 90%;
+        }
+
+        ul{
+            padding: 0;
+            width: 90%;
+        li{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+
+            p{
+                padding-bottom: 10px;
+            }
+        }}
+    }
+
 }

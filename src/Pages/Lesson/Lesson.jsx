@@ -74,18 +74,18 @@ function Lesson() {
                                             <li key={lesson.title}>
                                                 {lesson.status ===
                                                 'unlocked' ? (
-                                                    <div>
+                                                    <p>
                                                         {lesson.order}.{' '}
                                                         {lesson.title}
-                                                    </div>
+                                                    </p>
                                                 ) : (
-                                                    <div>
+                                                    <p>
                                                         {lesson.order}.{' '}
                                                         {lesson.title} -{' '}
                                                         <span>
                                                             {lesson.status}
                                                         </span>
-                                                    </div>
+                                                    </p>
                                                 )}
                                                 {lesson.id ===
                                                     selectedLessonId &&
@@ -124,17 +124,6 @@ function Lesson() {
                                                                     lesson.id
                                                                 }
                                                             />
-                                                            {/* <video
-                                                                controls
-                                                                className="lesson-video"
-                                                                ref={videoRef}
-                                                            >
-                                                                <source
-                                                                    src={
-                                                                        lesson.link
-                                                                    }
-                                                                />
-                                                            </video> */}
                                                             <p>
                                                                 Press button
                                                                 '&lt;' to

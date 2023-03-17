@@ -51,6 +51,9 @@ export const VideoPlayer = (props) => {
                 style={{
                     display: videoLoaded ? 'block' : 'none',
                     borderRadius: '15px',
+                    poster: {
+                        objectFit: 'cover',
+                    },
                 }}
                 poster={props.poster}
                 className={props.className}

@@ -1,3 +1,3 @@
-# React Drinks Bar portfolio project
+# Education React App
 
 [Demo](https://denchikchor.github.io/Courseria).

@@ -11,10 +11,15 @@ function Home() {
     const [coursesPerPage] = useState(10);
 
     useEffect(() => {
-        getAllLessons().then((data) => {
-            setLessons(data.courses);
-            setLoading(false);
-        });
+        getAllLessons()
+            .then((data) => {
+                setLessons(data.courses);
+                setLoading(false);
+            })
+            .catch((err) => {
+                console.log(err);
+                setLoading(false);
+            });
     }, []);
 
     const lastCourseIndex = currentPage * coursesPerPage;

@@ -34,7 +34,7 @@ function LessonItem(props) {
                                     }
                                     width="300px"
                                     muted={true}
-                                    autoPlay={false}
+                                    autoPlay={true}
                                 />
                             </div>
                         ) : (

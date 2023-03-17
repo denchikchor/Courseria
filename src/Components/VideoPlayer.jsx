@@ -13,7 +13,9 @@ export const VideoPlayer = (props) => {
                 hls.loadSource(props.src);
                 hls.attachMedia(videoElement);
                 hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                    videoElement.play();
+                    if (props.autoPlay) {
+                        videoElement.play();
+                    }
                 });
             } else if (videoElement.canPlayType('application/x-mpegURL')) {
                 videoElement.src = props.src;
@@ -22,7 +24,7 @@ export const VideoPlayer = (props) => {
                 });
             }
         }
-    }, [props.src]);
+    }, [props.src, props.autoPlay]);
 
     const [videoLoaded, setVideoLoaded] = useState(false);
 

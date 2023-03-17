@@ -6,12 +6,7 @@ function Footer() {
             <footer className="page-footer">
                 <div className="container">
                     © {new Date().getFullYear()} Copyright Text
-                    <a
-                        className="grey-text text-lighten-4 right"
-                        href="https://github.com/denchikchor/"
-                    >
-                        Repo
-                    </a>
+                    <a href="https://github.com/denchikchor/Courseria">Repo</a>
                 </div>
             </footer>
         </>

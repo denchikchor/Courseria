@@ -8,6 +8,7 @@ import './Lesson.scss';
 
 function Lesson() {
     const [course, setCourse] = useState({});
+    const [loading, setLoading] = useState(true);
     const { id } = useParams();
     const [selectedLessonId, setSelectedLessonId] = useState();
 
@@ -20,25 +21,36 @@ function Lesson() {
     };
 
     useEffect(() => {
-        getLessonById(id).then((data) => setCourse(data));
+        getLessonById(id)
+            .then((data) => {
+                setCourse(data);
+                setLoading(false);
+            })
+            .catch((err) => {
+                console.log(err);
+                setLoading(false);
+            });
     }, [id]);
 
     return (
         <>
-            {!course.id ? (
+            {!course.id && loading ? (
                 <Preloader />
             ) : (
                 <div className="lesson">
                     <h1>{course.title}</h1>
-                    <VideoPlayer
-                        src={course.lessons[0].link}
-                        controls={true}
-                        muted={true}
-                        autoPlay=""
-                        poster={course.previewImageLink + '/cover.webp'}
-                        className="main-lesson-video"
-                        autostart="false"
-                    />
+                    {course.lessons[0].link ? (
+                        <VideoPlayer
+                            src={course.lessons[0].link}
+                            controls={true}
+                            muted={true}
+                            autoPlay=""
+                            poster={course.previewImageLink + '/cover.webp'}
+                            className="main-lesson-video"
+                            autostart="false"
+                        />
+                    ) : null}
+
                     <p>{course.description}</p>
                     <p>
                         Rating: <span className="text">{course.rating}/5</span>
@@ -50,7 +62,7 @@ function Lesson() {
                                 {course.lessons
                                     .sort((a, b) => a.order - b.order)
                                     .map((lesson) =>
-                                        lesson.title && lesson.link ? (
+                                        lesson.title ? (
                                             <li key={lesson.title}>
                                                 {lesson.status ===
                                                 'unlocked' ? (
@@ -91,19 +103,25 @@ function Lesson() {
                                                                     X
                                                                 </button>
                                                             </div>
-                                                            <VideoPlayerCourse
-                                                                src={
-                                                                    lesson.link
-                                                                }
-                                                                controls={true}
-                                                                // width="500px"
-                                                                muted={false}
-                                                                autoPlay={false}
-                                                                className="lesson-video"
-                                                                videoId={
-                                                                    lesson.id
-                                                                }
-                                                            />
+                                                            {lesson.link ? (
+                                                                <VideoPlayerCourse
+                                                                    src={
+                                                                        lesson.link
+                                                                    }
+                                                                    controls={
+                                                                        true
+                                                                    }
+                                                                    // width="500px"
+                                                                    muted={
+                                                                        false
+                                                                    }
+                                                                    className="lesson-video"
+                                                                    videoId={
+                                                                        lesson.id
+                                                                    }
+                                                                />
+                                                            ) : null}
+
                                                             <p>
                                                                 Press button
                                                                 '&lt;' to
@@ -119,15 +137,19 @@ function Lesson() {
                                                     </div>
                                                 ) : (
                                                     <div>
-                                                        <button
-                                                            onClick={() =>
-                                                                handleClick(
-                                                                    lesson.id
-                                                                )
-                                                            }
-                                                        >
-                                                            Open lesson
-                                                        </button>
+                                                        {lesson.link &&
+                                                        lesson.status ===
+                                                            'unlocked' ? (
+                                                            <button
+                                                                onClick={() =>
+                                                                    handleClick(
+                                                                        lesson.id
+                                                                    )
+                                                                }
+                                                            >
+                                                                Open lesson
+                                                            </button>
+                                                        ) : null}
                                                     </div>
                                                 )}
                                             </li>

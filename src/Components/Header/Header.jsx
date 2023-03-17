@@ -10,7 +10,7 @@ function Header() {
             </Link>
 
             <div className="link">
-                <a href="!#">Repo</a>
+                <a href="https://github.com/denchikchor/Courseria">Repo</a>
             </div>
         </nav>
     );

@@ -61,11 +61,17 @@ export const VideoPlayerCourse = (props) => {
     }, [videoRef, props.videoId]);
 
     const handleTimeUpdate = () => {
-        setCurrentTime(videoRef.current.currentTime);
-        localStorage.setItem(
-            `videoProgress_${props.videoId}`,
-            videoRef.current.currentTime
-        );
+        if (videoRef.current.ended) {
+            videoRef.current.currentTime = 0;
+            localStorage.setItem(`videoProgress_${props.videoId}`, '0');
+            setCurrentTime(0);
+        } else {
+            setCurrentTime(videoRef.current.currentTime);
+            localStorage.setItem(
+                `videoProgress_${props.videoId}`,
+                videoRef.current.currentTime
+            );
+        }
     };
 
     // const videos = document.querySelectorAll('video');
@@ -113,7 +119,6 @@ export const VideoPlayerCourse = (props) => {
             <video
                 ref={videoRef}
                 src={props.src}
-                autoPlay={props.autoPlay}
                 muted={props.muted}
                 controls={props.controls}
                 width={props.width}
@@ -130,8 +135,11 @@ export const VideoPlayerCourse = (props) => {
             ></video>
             <button
                 id="pipButton"
-                className="hidden"
                 disabled
+                style={{
+                    marginTop: '10px',
+                    marginBottom: '10px',
+                }}
                 onClick={() => {
                     if (isPIPActive) {
                         document.exitPictureInPicture();

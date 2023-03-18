@@ -26,10 +26,16 @@ export const VideoPlayerCourse = (props) => {
 
     useEffect(() => {
         const handleKeyDown = (event) => {
-            if (event.code === 'Comma') {
+            if (
+                event.code === 'Comma' &&
+                videoRef.current.playbackRate > 0.25
+            ) {
                 // Decrease playback speed by 0.25
                 videoRef.current.playbackRate -= 0.25;
-            } else if (event.code === 'Period') {
+            } else if (
+                event.code === 'Period' &&
+                videoRef.current.playbackRate < 2
+            ) {
                 // Increase playback speed by 0.25
                 videoRef.current.playbackRate += 0.25;
             }
@@ -52,23 +58,23 @@ export const VideoPlayerCourse = (props) => {
 
     useEffect(() => {
         const savedProgress = localStorage.getItem(
-            `videoProgress_${props.videoId}`
+            `videoProgress_${props.videoid}`
         );
         if (savedProgress) {
             videoRef.current.currentTime = parseFloat(savedProgress);
             setCurrentTime(parseFloat(savedProgress));
         }
-    }, [videoRef, props.videoId]);
+    }, [videoRef, props.videoid]);
 
     const handleTimeUpdate = () => {
         if (videoRef.current.ended) {
             videoRef.current.currentTime = 0;
-            localStorage.setItem(`videoProgress_${props.videoId}`, '0');
+            localStorage.setItem(`videoProgress_${props.videoid}`, '0');
             setCurrentTime(0);
         } else {
             setCurrentTime(videoRef.current.currentTime);
             localStorage.setItem(
-                `videoProgress_${props.videoId}`,
+                `videoProgress_${props.videoid}`,
                 videoRef.current.currentTime
             );
         }
@@ -130,7 +136,7 @@ export const VideoPlayerCourse = (props) => {
                 poster={props.poster}
                 className={props.className}
                 onTimeUpdate={handleTimeUpdate}
-                videoId={props.videoId}
+                videoid={props.videoid}
                 id="video"
             ></video>
             <button

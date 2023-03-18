@@ -43,7 +43,7 @@ function Lesson() {
                         <VideoPlayer
                             src={course.lessons[0].link}
                             controls={true}
-                            muted={true}
+                            muted={false}
                             autoPlay=""
                             poster={course.previewImageLink + '/cover.webp'}
                             className="main-lesson-video"
@@ -82,8 +82,16 @@ function Lesson() {
                                                 {lesson.id ===
                                                     selectedLessonId &&
                                                 lesson.status === 'unlocked' ? (
-                                                    <div className="video-overlay">
-                                                        <div className="video-box ">
+                                                    <div
+                                                        className="video-overlay"
+                                                        onClick={handleClose}
+                                                    >
+                                                        <div
+                                                            className="video-box"
+                                                            onClick={(e) =>
+                                                                e.stopPropagation()
+                                                            }
+                                                        >
                                                             <div className="navbar">
                                                                 <div>
                                                                     {
@@ -116,7 +124,7 @@ function Lesson() {
                                                                         false
                                                                     }
                                                                     className="lesson-video"
-                                                                    videoId={
+                                                                    videoid={
                                                                         lesson.id
                                                                     }
                                                                 />

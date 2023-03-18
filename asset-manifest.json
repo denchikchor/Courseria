@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Courseria/static/css/main.06f8eef6.css",
-    "main.js": "/Courseria/static/js/main.ffbb03f6.js",
+    "main.js": "/Courseria/static/js/main.2e44da57.js",
     "static/media/logo.svg": "/Courseria/static/media/logo.d6e9186f31c3bde9c97ee80ba6bd86f3.svg",
     "index.html": "/Courseria/index.html",
     "main.06f8eef6.css.map": "/Courseria/static/css/main.06f8eef6.css.map",
-    "main.ffbb03f6.js.map": "/Courseria/static/js/main.ffbb03f6.js.map"
+    "main.2e44da57.js.map": "/Courseria/static/js/main.2e44da57.js.map"
   },
   "entrypoints": [
     "static/css/main.06f8eef6.css",
-    "static/js/main.ffbb03f6.js"
+    "static/js/main.2e44da57.js"
   ]
 }

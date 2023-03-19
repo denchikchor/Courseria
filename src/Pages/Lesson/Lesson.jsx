@@ -119,7 +119,6 @@ function Lesson() {
                                                                     controls={
                                                                         true
                                                                     }
-                                                                    // width="500px"
                                                                     muted={
                                                                         false
                                                                     }

@@ -32,11 +32,6 @@ export const VideoPlayer = (props) => {
         setVideoLoaded(true);
     };
 
-    // const videos = document.querySelectorAll('video');
-    // for (const video of videos) {
-    //     video.pause();
-    // }
-
     return (
         <>
             {!videoLoaded && <PreloaderForVideo />}

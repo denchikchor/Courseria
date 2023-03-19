@@ -20,7 +20,6 @@
     video[poster]{
         border-radius:15px;
         object-fit: cover;
-
         }  
 
     ul{
@@ -111,7 +110,6 @@
     }
 }
 
-
 @media screen and (max-width: 768px){
     .lesson{
         width: 90%;
@@ -123,6 +121,7 @@
         ul{
             padding: 0;
             width: 90%;
+
         li{
             width: 100%;
             display: flex;

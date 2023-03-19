@@ -80,11 +80,6 @@ export const VideoPlayerCourse = (props) => {
         }
     };
 
-    // const videos = document.querySelectorAll('video');
-    // for (const video of videos) {
-    //     video.pause();
-    // }
-
     const [isPIPActive, setIsPIPActive] = useState(false);
 
     useEffect(() => {
